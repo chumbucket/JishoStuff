@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name         Jisho stuff
 // @namespace    https://chumbucket.github.io/
-// @version      0.1
+// @version      0.2
 // @description  Jisho extensions
 // @author       You
 // @match        https://jisho.org/*
+// @downloadURL  https://github.com/chumbucket/JishoStuff/raw/main/JishoStuff.user.js
+// @updateURL    https://github.com/chumbucket/JishoStuff/raw/main/JishoStuff.user.js
 // @grant        none
 // ==/UserScript==
 
