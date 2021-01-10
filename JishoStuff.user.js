@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Jisho stuff
-// @namespace    https://chumbucket.github.io/
-// @version      0.3
-// @description  Jisho extensions
+// @namespace    https://github.com/chumbucket/JishoStuff
+// @version      0.4
+// @description  Search the radical list by labels that you define.
 // @author       chumbucket
 // @match        https://jisho.org/*
 // @downloadURL  https://github.com/chumbucket/JishoStuff/raw/main/JishoStuff.user.js
@@ -12,29 +12,31 @@
 
 (function () {
 	'use strict';
-	const hideFurigana = function () {
-		if (-1 == location.href.indexOf('%23sentences')) {
-			return;
-		}
-		var styleElement = document.createElement('style');
-		styleElement.setAttribute('type', 'text/css');
-		styleElement.innerHTML =
-      '.furigana{opacity:0!important}' +
-      '.furigana:hover{opacity:1!important}' +
-      '.english{opacity:0!important}' +
-      '.english:hover{opacity:1!important}';
-		document.body.appendChild(styleElement);
-	};
-	hideFurigana();
-	const searchSelectedWord = function (e) {
-		if (13 == e.keyCode) {
-			var selectedWord = window.getSelection().toString();
-			if (selectedWord) {
-				window.open('https://jisho.org/search/' + selectedWord);
+	const extraFunctions = function () {
+		const hideFurigana = function () {
+			if (-1 == location.href.indexOf('%23sentences')) {
+				return;
 			}
-		}
+			var styleElement = document.createElement('style');
+			styleElement.setAttribute('type', 'text/css');
+			styleElement.innerHTML =
+        '.furigana{opacity:0!important}' +
+        '.furigana:hover{opacity:1!important}' +
+        '.english{opacity:0!important}' +
+        '.english:hover{opacity:1!important}';
+			document.body.appendChild(styleElement);
+		};
+		hideFurigana();
+		const searchSelectedWord = function (e) {
+			if (13 == e.keyCode) {
+				var selectedWord = window.getSelection().toString();
+				if (selectedWord) {
+					window.open('https://jisho.org/search/' + selectedWord);
+				}
+			}
+		};
+		window.addEventListener('keyup', searchSelectedWord);
 	};
-	window.addEventListener('keyup', searchSelectedWord);
 	const $ = window.jQuery || null;
 	if (!$) {
 		console.error('TM JishoStuff: jQuery is undefined');
